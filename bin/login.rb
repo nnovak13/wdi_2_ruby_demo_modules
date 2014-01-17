@@ -6,9 +6,6 @@ email = gets.chomp
 print "Enter a password: "
 password = gets.chomp
 
-print "Confirm password: "
-password_confirmation = gets.chomp
-
 if GA::User.login(email, password)
   puts "User #{email} has logged in"
 else
