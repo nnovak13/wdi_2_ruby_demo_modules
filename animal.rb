@@ -1,5 +1,9 @@
+# module # defines a module, really a class.
+
+require_relative './lib/talk'
+
 # Inheritance
-#require_relative 'climbing'
+require_relative 'climbing'
 
 # Define an parent Animal class
 class Animal
@@ -10,23 +14,26 @@ end
 
 # Define a Mammal class that inherits from Animal
 class Mammal < Animal
+
+  include Talk
+
   def eat
-    puts "i can eat! yum yum yum"
+    say "i can eat! yum yum yum"
   end
   def speak
-    puts "i can speak"
+    say "i can speak"
   end
 end
 
 # Define a Monkey class that inherits from Mammal
 class Monkey < Mammal
-#  include Climbing
+  include Climbing
 
   def swing
-    puts "i can swing!"
+    say "i can swing!"
   end
   def speak
-    puts "HoWwOo WHoWo"
+    say "HoWwOo WHoWo"
   end
 end
 
@@ -34,22 +41,21 @@ end
 class Dog < Mammal
   def speak
     super
-    puts "WHOOF"
+    say "WHOOF"
   end
 end
 
 # Instantiate a Monkey and show off what it can do
-puts "\nI'm a Monkey and I can:"
+puts  "\nI'm a Monkey and I can:"
 timmy = Monkey.new
 timmy.move
 timmy.eat
 timmy.swing
 timmy.speak
-
-# timmy.climb
+timmy.climb
 
 # Instantiate a Dog and show off what it can do
-puts "\nI'm a Dog and I can:"
+puts  "\nI'm a Dog and I can:"
 sammy = Dog.new
 sammy.move
 sammy.eat

@@ -3,8 +3,10 @@
 
 # module keyword
 # module is like a class, BUT you create an instance of a module.
+
+# Talk#say_something
 module Talk
-  def say(phrase)
+  def say_something(phrase)
     # call the OSX say command
     %x{say #{phrase} }
   end
@@ -19,7 +21,7 @@ end
 
 # Instantiate the class
 my_class = MyTalkyClass.new
-puts "MyTalkyClass#say will say #{my_class.say("hello")} "
+# puts "MyTalkyClass#say will say #{my_class.say_something("hello")} "
 
 # Enumerables
 # After including the Enumerable module, define the each method
@@ -36,7 +38,8 @@ class BunchOfIntegers
 
     def each(&block)
         @num_array.each do |member|
-            block.call(member)
+            yield(member)
+            # block.call(member)
         end
     end
 
@@ -44,7 +47,10 @@ end
 
 my_ints = BunchOfIntegers.new(1, 4)
 my_ints.each { |value| p "*** #{value} ***"}
+
 puts my_ints.map{ |value| value*value }.join(' : ')
+
+puts my_ints.find { |val| val == 3}
 
 
 
