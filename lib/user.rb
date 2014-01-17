@@ -26,6 +26,7 @@ module GA
     def encrypt_password
       @password_salt = BCrypt::Engine.generate_salt
       @password_hash = BCrypt::Engine.hash_secret(password, @password_salt)
+      true
     end
 
     def valid?

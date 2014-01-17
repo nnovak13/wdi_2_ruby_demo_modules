@@ -1,7 +1,6 @@
 require_relative './spec_helper'
 require_relative '../lib/user'
 
-
 describe GA::User do
   after(:each) do
     rm_passwd_file
@@ -21,7 +20,11 @@ describe GA::User do
   subject() {GA::User.new(email, password, password_confirmation)}
 
   it "#encrypt_password" do
-    expect(subject.encrypt_password).to_not eq subject.encrypt_password
+    expect(subject.encrypt_password).to be_true
+  end
+
+  it "#pwd_str" do
+    expect(subject.encrypt_password).to be_true
   end
 
   describe "without a password hash" do
