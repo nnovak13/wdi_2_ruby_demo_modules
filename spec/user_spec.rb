@@ -23,10 +23,6 @@ describe GA::User do
     expect(subject.encrypt_password).to be_true
   end
 
-  it "#pwd_str" do
-    expect(subject.encrypt_password).to be_true
-  end
-
   describe "without a password hash" do
     it "save!" do
       expect {subject.save!}.to raise_error GA::UserError
@@ -36,6 +32,25 @@ describe GA::User do
   describe "with a password hash" do
     before(:each) do
       subject.encrypt_password
+    end
+    it "#pwd_str" do
+      email, hash, salt = subject.pwd_str.split(':')
+      expect(email).to eq subject.email
+
+    end
+
+    it "should generate unique salt and password hash" do
+      # hash and salt should be different each time
+      salts = []
+      hashes = []
+      5.times do |i|
+        user = GA::User.new(email, password, password_confirmation)
+        user.encrypt_password
+        _, hashes[i], salts[i] =  user.pwd_str.split(':')
+      end
+
+      expect(hashes.uniq.length).to eq 5
+      expect(salts.uniq.length).to eq 5
     end
 
     it "save!" do
