@@ -1,8 +1,8 @@
-# Define a module used as a Mix
+# Define a module used as a Mixin.
 # I'll "include" it in every class that wants to talk.
 
-# module keyword
-# module is like a class, BUT you create an instance of a module.
+# module is a keyword
+# module is like a class, BUT you CAN NOT create an instance of a module.
 
 # Talk#say_something
 module Talk
@@ -15,16 +15,17 @@ end
 # Define a class
 class MyTalkyClass
   # Here's, the magic!!!
-  # include all of the Talk module method into this classoo
+  # include all of the Talk module methods into this classoo
   include Talk
 end
 
 # Instantiate the class
 my_class = MyTalkyClass.new
-# puts "MyTalkyClass#say will say #{my_class.say_something("hello")} "
+puts "MyTalkyClass#say will say #{my_class.say_something("hello")} "
 
+# WARNING: ADVANCED TOPIC #################
 # Enumerables
-# After including the Enumerable module, define the each method
+# After including the Enumerable module we'll define the each method
 # This allows for other enumerables like map to work on this class
 class BunchOfIntegers
 
