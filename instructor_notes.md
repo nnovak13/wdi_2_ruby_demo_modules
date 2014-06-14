@@ -1,16 +1,28 @@
 ## Using Modules as Mixins
 
-A Mixin is a Design Pattern that will provide methods that can be _included_ into a Class.
+A Mixin is a _Design Pattern_ that will a provide behavior that can be shared across many Classes. 
 
-We can use Ruby modules as a Mixin.
+We can use Ruby modules as Mixins. It's one of the two common uses for Modules in Ruby.
 
-A Ruby module is defined like a class. Use the __module__ keyword instead of __class__. _Note: In Ruby one can NOT create instances/objects of a module_
+A Ruby module :  
 
-##### Create a file lib/talk.rb
+* Is defined like a class but uses the __module__ keyword instead of __class__.  
+* Can NOT be used create instances/objects of a module.  
+* Can be mixed into a Class using the _include_ keyword.
+* When mixed in using the _include_ keyword it provides instance methods.  
+* Can be mixed into the a Class using the _extend_ keyword.  
+* When mixed in using the _extend_ keyword it provides class methods.  
+
+
+### Demo
+
+
 Create a Talk __module__ that will have a method _say_it_. The _say_it_
 method will output it's argument to the OSX _say_ command. 
 
-In the terminal type 'say this is tuesday'. Cool, huh.  
+__First__, in the terminal type 'say this is tuesday'. Cool, huh. 
+
+##### Create a file lib/talk.rb. 
 
 ```
   # module is a keyword
@@ -62,10 +74,45 @@ defined in the Talk module into the Person class.
   tom = Person.new('Tom', 'Smith') 
 ```
 
+The Talk module mixed in all it's method into the Person class. Now the Person class has an _instance_ method named say_it.  
 
 ### Lab
-Modify the lib/animal.rb file so that 
+Modify the lib/animal.rb file so that:
 
-* Create a module that will have a climb method.  
-* It will just "puts climb"
-* It 
+* A Person and Parrot can talk, use the Talk module.
+* A Parrot and Bat can fly, create a module for Flying.
+
+Modify the file bin/create_animals.rb:  
+* To hear People and Parrots talk.  
+* To show that Parrots and Bats can fly.
+
+
+### Question: Why can't one just
+ create a Talk class and make Person and Parrot a subclass of this Talk class?
+ 
+
+## If your coming from other programming languages.
+You may have heard of the term _Cross Cutting Concerns_ in Aspect Oriented Programming (AOP). These are Concerns/Behavior/Methods that are used in some classes. 
+
+A typical _Concern_ in an application is Logging. It's used in many of your classes. But, you either cannot or do not want to subclass all your classes from a Log class. So the alternative is to Mixin the behavior.
+
+_Note: AOP typically has a way of auto injecting concerns. I have never seen this in Ruby._
+
+## Summary
+
+A Ruby module:  
+
+* Can be used as a _Mixin_.  
+* A _Mixin_ is a set of methods that can be mixed into or included in a class.  
+* The __include__ keyword followed by the name of the module will mixin the 
+module's methods.  
+
+```
+class Person
+  include Talk
+end
+```	
+
+* Multiple modules can be mixed into classes.  
+* A Ruby class can _only_ subclass from one other class.  
+	This is one reason we use modules as Mixin. To isolate behavior in modules and only include them only were needed.

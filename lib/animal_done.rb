@@ -1,19 +1,26 @@
-# All Animals can move, unlike Plants
-# Dogs can't talk or fly, poor doggies
+require_relative 'talk_done'
+require_relative 'fly'
+
+# All Animals have a name and can move, unlike Plants
+# Dogs can do much, other than move.
 # People can talk.
 # Parrots can talk and fly.
-# Bats can fly
+# Bats can fly. 
 
 # Root of hierarchy
-# Whats to the root of all Ruby Objects?
-
+# Whats the root of all Ruby Objects?
 class Animal
+  attr_accessor :name
+  def initialize(name)
+    @name = name
+  end
+
   def move
-    puts "i can move "
+     "The #{self.class.name}, #{name}, can move "
   end
 end
 
-# Dog's can only ove
+# Dog's can only move
 class Dog < Animal
   def move
     super + " on four legs!"
@@ -22,7 +29,7 @@ end
 
 # People can move and talk
 class Person < Animal
-
+  include Talk
   def move
     super + " on two legs"
   end
@@ -30,14 +37,17 @@ class Person < Animal
 end
 
 # Parrot's can move, talk and fly
-class Parrot
+class Parrot < Animal
+  include Talk
+  include Fly
+  
   def move
-    super + " using my wings"
+    super + " using wings"
   end
 end
 
 # A Bat can move and fly
-class Bat < Mammal
-
+class Bat < Animal
+  include Fly
 end
 
