@@ -1,6 +1,6 @@
 ## Ruby Modules.
 
-Ruby modules can be used to:
+Ruby modules can be used:
 
 1) As a __Mixin__ which shares behavior by _including_ methods from a Module into Classes.  
 2) To create a __Namespace__ that will prevent name collision between Classes and Modules in one's application and the libraries they are using.
