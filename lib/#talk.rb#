@@ -1,6 +1,0 @@
-module Talk
-  # pass the phrase to the OSX command say
-  def say(phrase)
-    %x{ say #{phrase} }
-  end
-end

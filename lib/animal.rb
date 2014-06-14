@@ -1,62 +1,47 @@
-# module # defines a module, really a class.
+# All Animals have a name and can move, unlike Plants
+# Dogs can do much, other than move.
+# People can talk.
+# Parrots can talk and fly.
+# Bats can fly. 
 
-require_relative './lib/talk'
-
-# Inheritance
-require_relative 'climbing'
-
-# Define an parent Animal class
+# Root of hierarchy
+# Whats the root of all Ruby Objects?
 class Animal
+  attr_accessor :name
+  def initialize(name)
+    @name = name
+  end
+
   def move
-    puts "i can move!"
+     "The #{self.class.name}, #{name}, can move "
   end
 end
 
-# Define a Mammal class that inherits from Animal
-class Mammal < Animal
-
-  include Talk
-
-  def eat
-    say "i can eat! yum yum yum"
-  end
-  def speak
-    say "i can speak"
+# Dog's can only move
+class Dog < Animal
+  def move
+    super + " on four legs!"
   end
 end
 
-# Define a Monkey class that inherits from Mammal
-class Monkey < Mammal
-  include Climbing
+# People can move and talk
+class Person < Animal
 
-  def swing
-    say "i can swing!"
+  def move
+    super + " on two legs"
   end
-  def speak
-    say "HoWwOo WHoWo"
+
+end
+
+# Parrot's can move, talk and fly
+class Parrot < Animal
+  def move
+    super + " using wings"
   end
 end
 
-# Define a Dog class that inherits from Mammal
-class Dog < Mammal
-  def speak
-    super
-    say "WHOOF"
-  end
+# A Bat can move and fly
+class Bat < Animal
+
 end
 
-# Instantiate a Monkey and show off what it can do
-puts  "\nI'm a Monkey and I can:"
-timmy = Monkey.new
-timmy.move
-timmy.eat
-timmy.swing
-timmy.speak
-timmy.climb
-
-# Instantiate a Dog and show off what it can do
-puts  "\nI'm a Dog and I can:"
-sammy = Dog.new
-sammy.move
-sammy.eat
-sammy.speak
