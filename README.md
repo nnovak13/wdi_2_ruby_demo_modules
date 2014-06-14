@@ -1,56 +1,50 @@
-## Modules & Mixins
+## Ruby Modules.
 
-**Objectives:**
-Demonstrate the following using a code-along.
+Ruby modules can be used to:
 
-* Use a Ruby module to avoid name conflicts.
-* Use a Ruby module to share common behavior.
-  
-  Use the Mixin patter to share behavior, *cross cutting concerns*, across classes.
-  
-  This keeps our code DRY (Don't Repeat Yourself).
+1) As a __Mixin__ which shares behavior by _including_ methods from a Module into Classes.  
+2) To create a __Namespace__ that will prevent name collision between Classes and Modules in one's application and the libraries they are using.
 
-** Demonstration **
+## Modules as a Mixin
 
-* Look at the ruby_modules.rb file for a very simple example of the Mixin pattern.
-  	
-* Look thru the animal.rb and notice how it includes *climbing* behavior in the Monkey class.
+See [Instructor Notes](instructor_notes.md)
 
-* Look at the data.rb file. The Data class defined here conflicts with a class that is built in to ruby.
-  * Namespace this class using a module.
+## Modules as a Namespace
+
+If an application has a common name, like Date or Person. It could collide or conflict with another class of the same name in a library being used.
+
+### Demo
+
+In my Dating application I have a Date class representing a date
+between people.
+
+And in my Ruby library, _gem_, I have a Date class representing today or some other day.
+
+Then this will cause a _Name Collision_. These Date classes represent totally different concepts. But, they will be mixed in together.
+
+And perhaps they MAY have methods of the same name. In which case the last class loaded into Ruby will override the definition of the previous method.
+
+#### Look at the bin/dating_app.rb
+
+Got an Argument error probably because we're trying to use the wrong method on the wrong Date class.
+
+#### Solution is to use a Ruby module as a Namespace.
+Wrap the application Date class in a module. 
 
 
-* Show how Ruby doesn't implement multiple base classes.
-  * Why this is good thing
+#### Look at the bin/dating_app_done.rb
+
+Here we are _Namespacing_ the app's Date class inside the namespace
+MyDatingApp. And using this namespace when we need the app's Date class.
+
+
+### Advanced
+If you are coming from another language that allows classes to have multiple parents. You will notice that Ruby will only allow you subclass from one other class.
+
+This constraint will prevent the [Diamond Problem](http://www.programmerinterview.com/index.php/c-cplusplus/diamond-problem/).  
+
+If a subclass, D, inherits from 2 classes, B & C, and B and C both have a method of the same name, sum. 
     
-    [Diamond Problem](http://www.programmerinterview.com/index.php/c-cplusplus/diamond-problem/).
-    If a subclass, D, inherits from 2 classes, B & C, and B and C both have a method of the same
-    name, sum. 
-    
-    Which method is used when we call the sum method on an instance class D?
+Which method is used when we call the sum method on an instance class D?
 
-* We cannot share code through multiple inheritance so we 'll use the Mixin pattern.
-
-  This is where a Ruby module is created and it's methods, behavior, is shared across
-  (*mixed in*) to  other classes.
-  
-  
-
-> Caveat: These techinques are used to reduce technical debt and it's difficult to see how they help out with these small examples. 
-
-** Lab **
-
-* Create a module that will add the biting behavior and include this behavior in the Dog class, defined in the animal.rb file.
-
-* Look at the lib/user.rb file. 
-   A ruby gem or another ruby library could __also__ have a class named User.
-
-  * Run the spec for this class, rspec -f s 
-  * Namespace this User class to avoid naming conflicts.
-  * Run the spec again and fix.
-
-* Run ruby bin/create_user.rb . __fix it if needed__
-* 
-* Add Logger module that will print out to the command line every time a user is saved.
-
-
+ 
