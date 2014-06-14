@@ -90,6 +90,12 @@ Modify the file bin/create_animals.rb:
 ### Question: Why can't one just
  create a Talk class and make Person and Parrot a subclass of this Talk class?
  
+### Demo
+Using the __extend__ keyword to Mixin class methods.
+
+* Mixin the Counter module using the __extend__ keyword.  
+* Set an ID for each person using the increment_counter method.  
+* Run the bin/create_person.rb 
 
 ## If your coming from other programming languages.
 You may have heard of the term _Cross Cutting Concerns_ in Aspect Oriented Programming (AOP). These are Concerns/Behavior/Methods that are used in some classes. 
@@ -105,11 +111,19 @@ A Ruby module:
 * Can be used as a _Mixin_.  
 * A _Mixin_ is a set of methods that can be mixed into or included in a class.  
 * The __include__ keyword followed by the name of the module will mixin the 
-module's methods.  
+module's methods as __instance__ methods.  
 
 ```
 class Person
   include Talk
+end
+```	
+* The __extend__ keyword followed by the name of the module will mixin the 
+module's methods as __class__ methods.  
+
+```
+class Person
+  extend Counter
 end
 ```	
 

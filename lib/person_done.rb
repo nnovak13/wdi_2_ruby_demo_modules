@@ -1,13 +1,24 @@
 require_relative 'talk'
+require_relative 'counter'
 
 # Define a Person class
 class Person
-  # include all of the Talk module methods into this class
+  attr_reader :id
+  
+  # All methods in the Counter module
+  # will become class methods.
+  extend Counter
+  
+  # All methods in the Talk module
+  # will become instance methods.
   include Talk
 
   def initialize(fname, lname)
     @first_name, @last_name = fname, lname
-    say_it("Hey, we created #{full_name}")
+    @id = Person.increment_counter
+    
+
+    say_it("Hey, we created #{full_name} with i d #{id}")
   end 
 
   def full_name
