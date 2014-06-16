@@ -16,3 +16,5 @@ puts belfy.move
 # Make Joe and poly say something
 
 # Show that poly and belfy can fly, fly
+poly.fly('I can talk and fly!')
+belfy.fly('Maaaaaaaaan, I can ony fly')
